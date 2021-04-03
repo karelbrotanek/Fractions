@@ -1,5 +1,8 @@
 package cz.educanet;
 
+import static cz.educanet.MathUtils.findGreatestCommonDenominator;
+import static cz.educanet.MathUtils.findLowestCommonMultiple;
+
 public class Fraction {
 
     private final int numerator;
@@ -17,7 +20,9 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction plus(Fraction other) {
-        throw new UnsupportedOperationException();
+        int spolecnydelitel = findLowestCommonMultiple(this.denominator, other.denominator);// this je jmenovatel prvniho zlomku a other je jmenovatel druheho
+        return new Fraction(this.numerator * spolecnydelitel / this.denominator + other.numerator * spolecnydelitel / other.denominator, spolecnydelitel);//scitani zlomku
+        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -26,7 +31,9 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction minus(Fraction other) {
-        throw new UnsupportedOperationException();
+        int spolecnydelitel = findLowestCommonMultiple(this.denominator, other.denominator);// this je jmenovatel prvniho zlomku a other je jmenovatel druheho
+        return new Fraction(this.numerator * spolecnydelitel / this.denominator - other.numerator * spolecnydelitel / other.denominator, spolecnydelitel);//scitani zlomku
+        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -35,7 +42,8 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction times(Fraction other) {
-        throw new UnsupportedOperationException();
+        return new Fraction(this.numerator * other.numerator, this.denominator * other.denominator);//nasobeni zlomku
+        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -44,7 +52,8 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction dividedBy(Fraction other) {
-        throw new UnsupportedOperationException();
+        return this.times(other.getReciprocal());// prvni zlomek krat prevracena hodnota druheho
+        //throw new UnsupportedOperationException();
     }
     //endregion
 
@@ -54,7 +63,8 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction getReciprocal() {
-        throw new UnsupportedOperationException();
+        return new Fraction(this.denominator,this.numerator);
+        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -62,7 +72,9 @@ public class Fraction {
      * @return new fraction
      */
     public Fraction simplify() {
-        throw new UnsupportedOperationException();
+        int delitel = findGreatestCommonDenominator(this.denominator,this.numerator);//najde nejvetsi delitele
+        return new Fraction(this.numerator/delitel, this.denominator/delitel);
+        //throw new UnsupportedOperationException();
     }
 
     /**
@@ -70,7 +82,8 @@ public class Fraction {
      * @return float
      */
     public float toFloat() {
-        throw new UnsupportedOperationException();
+        return (float) (this.numerator * 1.0 / this.denominator);// prevadi na float
+        //throw new UnsupportedOperationException();
     }
     //endregion
 
